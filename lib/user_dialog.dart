@@ -5,17 +5,17 @@ import 'dart:io';
 import 'package:my_first_app/user.dart';
 
 class UserDialog extends StatefulWidget {
-  User? user;
+  final User? user;
   final Function(String name, int age, String gender, String hometown, String? profilePicture) onSubmit;
   
-  UserDialog({
+  const UserDialog({
     super.key,
     this.user,
     required this.onSubmit,
   });
   
   @override
-  _UserDialogState createState() => _UserDialogState();
+  State<UserDialog> createState() => _UserDialogState();
 }
 
 class _UserDialogState extends State<UserDialog> {
@@ -35,6 +35,7 @@ class _UserDialogState extends State<UserDialog> {
     ageController = TextEditingController(text: widget.user?.age.toString() ?? '');
     hometownController = TextEditingController(text: widget.user?.hometown ?? '');
     gender = widget.user?.gender ?? "Male";
+    imagePath = widget.user?.profilePicture;
     imageFile = widget.user?.profilePicture != null ? File(widget.user!.profilePicture!) : null;
   }
 

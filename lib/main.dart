@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/empty_book.dart';
+import 'package:my_first_app/user_dialog.dart';
 import 'book.dart';
 import 'user.dart';
 import 'book_card.dart';
@@ -244,12 +245,14 @@ class _BookListState extends State<BookList> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return BookDialog(
-                    users: users,
-                    onSubmit: (title, text, userId, imagePath) {
-                      _addBook(title, text, userId, imagePath);
-                    },
-                  );
+                  return _currentTabIndex == 1
+                      ? UserDialog(onSubmit: _addUser)
+                      : BookDialog(
+                        users: users,
+                        onSubmit: (title, text, userId, imagePath) {
+                          _addBook(title, text, userId, imagePath);
+                        },
+                      );
                 },
               );
             },
